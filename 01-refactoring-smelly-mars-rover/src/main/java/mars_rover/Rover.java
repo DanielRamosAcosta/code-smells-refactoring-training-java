@@ -9,7 +9,7 @@ public class Rover {
 
     public Rover(int x, int y, String direction) {
         this.setDirection(direction);
-        this.setCoordinates(x, y);
+        coordinate = new Coordinate(x, y);
     }
 
     public void receive(String commandsSequence) {
@@ -51,20 +51,16 @@ public class Rover {
                 int displacement = displacement1;
 
                 if (direction.isFacingNorth()) {
-                    setCoordinates(coordinate.getX(), coordinate.getY() + displacement);
+                    coordinate = coordinate.moveAlongYAxis(displacement);
                 } else if (direction.isFacingSouth()) {
-                    setCoordinates(coordinate.getX(), coordinate.getY() - displacement);
+                    coordinate = coordinate.moveAlongYAxis(-displacement);
                 } else if (direction.isFacingWest()) {
-                    setCoordinates(coordinate.getX() - displacement, coordinate.getY());
+                    coordinate = coordinate.moveAlongXAxis(-displacement);
                 } else {
-                    setCoordinates(coordinate.getX() + displacement, coordinate.getY());
+                    coordinate = coordinate.moveAlongXAxis(displacement);
                 }
             }
         }
-    }
-
-    private void setCoordinates(int x1, int y1) {
-        coordinate = new Coordinate(x1, y1);
     }
 
     @Override
