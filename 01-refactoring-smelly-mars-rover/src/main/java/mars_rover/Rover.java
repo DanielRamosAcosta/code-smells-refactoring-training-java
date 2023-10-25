@@ -17,18 +17,21 @@ public class Rover {
     public void receive(String commandsSequence) {
         for (int i = 0; i < commandsSequence.length(); ++i) {
             String command = commandsSequence.substring(i, i + 1);
+            execute(command);
+        }
+    }
 
-            if (command.equals("l")) {
-                direction = direction.rotateLeft();
-            } else if (command.equals("r")) {
-                direction = direction.rotateRight();
-            } else if (command.equals("f")) {
-                // Displace Rover
-                coordinate = direction.move(coordinate, DISPLACEMENT);
-            } else {
-                // Displace Rover
-                coordinate = direction.move(coordinate, -DISPLACEMENT);
-            }
+    private void execute(String command) {
+        if (command.equals("l")) {
+            direction = direction.rotateLeft();
+        } else if (command.equals("r")) {
+            direction = direction.rotateRight();
+        } else if (command.equals("f")) {
+            // Displace Rover
+            coordinate = direction.move(coordinate, DISPLACEMENT);
+        } else {
+            // Displace Rover
+            coordinate = direction.move(coordinate, -DISPLACEMENT);
         }
     }
 
