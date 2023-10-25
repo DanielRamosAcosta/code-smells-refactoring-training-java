@@ -63,13 +63,17 @@ public enum Direction {
         }
     };
 
+    private static final String SOUTH_ENCODING = "S";
+    private static final String EAST_ENCODING = "E";
+    private static final String WEST_ENCODING = "W";
+
     public static Direction create(String encoding) {
         switch (encoding) {
-            case "S":
+            case SOUTH_ENCODING:
                 return S;
-            case "E":
+            case EAST_ENCODING:
                 return E;
-            case "W":
+            case WEST_ENCODING:
                 return W;
             default:
                 return N;
