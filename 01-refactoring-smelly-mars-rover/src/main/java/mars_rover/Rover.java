@@ -7,6 +7,8 @@ public class Rover {
 
     private Coordinate coordinate;
 
+    public static final int DISPLACEMENT = 1;
+
     public Rover(int x, int y, String direction) {
         this.direction = Direction.create(direction);
         coordinate = new Coordinate(x, y);
@@ -20,17 +22,12 @@ public class Rover {
                 direction = direction.rotateLeft();
             } else if (command.equals("r")) {
                 direction = direction.rotateRight();
-            } else {
-
+            } else if (command.equals("f")) {
                 // Displace Rover
-                int displacement1 = -1;
-
-                if (command.equals("f")) {
-                    displacement1 = 1;
-                }
-                int displacement = displacement1;
-
-                coordinate = direction.move(coordinate, displacement);
+                coordinate = direction.move(coordinate, DISPLACEMENT);
+            } else {
+                // Displace Rover
+                coordinate = direction.move(coordinate, -DISPLACEMENT);
             }
         }
     }
