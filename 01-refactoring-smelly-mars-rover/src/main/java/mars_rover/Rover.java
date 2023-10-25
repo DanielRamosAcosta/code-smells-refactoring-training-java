@@ -1,4 +1,6 @@
 package mars_rover;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Rover {
@@ -15,10 +17,18 @@ public class Rover {
     }
 
     public void receive(String commandsSequence) {
+        final List<String> commands = extractCommands(commandsSequence);
+
+        commands.forEach(this::execute);
+    }
+
+    private static List<String> extractCommands(String commandsSequence) {
+        List<String> commands = new ArrayList<>();
         for (int i = 0; i < commandsSequence.length(); ++i) {
             String command = commandsSequence.substring(i, i + 1);
-            execute(command);
+            commands.add(command);
         }
+        return commands;
     }
 
     private void execute(String command) {
