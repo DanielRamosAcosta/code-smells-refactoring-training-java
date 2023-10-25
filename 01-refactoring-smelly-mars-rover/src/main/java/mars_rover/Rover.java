@@ -9,8 +9,7 @@ public class Rover {
 
     public Rover(int x, int y, String direction) {
         this.setDirection(direction);
-        this.y = y;
-        this.x = x;
+        this.setCoordinates(x, y);
     }
 
     public void receive(String commandsSequence) {
@@ -52,16 +51,21 @@ public class Rover {
                 int displacement = displacement1;
 
                 if (direction.isFacingNorth()) {
-                    y += displacement;
+                    setCoordinates(x, y + displacement);
                 } else if (direction.isFacingSouth()) {
-                    y -= displacement;
+                    setCoordinates(x, y - displacement);
                 } else if (direction.isFacingWest()) {
-                    x -= displacement;
+                    setCoordinates(x - displacement, y);
                 } else {
-                    x += displacement;
+                    setCoordinates(x + displacement, y);
                 }
             }
         }
+    }
+
+    private void setCoordinates(int x1, int y1) {
+        y = y1;
+        x = x1;
     }
 
     @Override
