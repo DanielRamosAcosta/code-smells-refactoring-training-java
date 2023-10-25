@@ -4,12 +4,12 @@ public enum Direction {
     N {
         @Override
         public Direction rotateLeft() {
-            return Direction.create("W");
+            return W;
         }
 
         @Override
         public Direction rotateRight() {
-            return Direction.create("E");
+            return E;
         }
 
         @Override
@@ -19,12 +19,12 @@ public enum Direction {
     }, S {
         @Override
         public Direction rotateLeft() {
-            return Direction.create("E");
+            return E;
         }
 
         @Override
         public Direction rotateRight() {
-            return Direction.create("W");
+            return W;
         }
 
         @Override
@@ -34,12 +34,12 @@ public enum Direction {
     }, E {
         @Override
         public Direction rotateLeft() {
-            return Direction.create("N");
+            return N;
         }
 
         @Override
         public Direction rotateRight() {
-            return Direction.create("S");
+            return S;
         }
 
         @Override
@@ -49,12 +49,12 @@ public enum Direction {
     }, W {
         @Override
         public Direction rotateLeft() {
-            return Direction.create("S");
+            return S;
         }
 
         @Override
         public Direction rotateRight() {
-            return Direction.create("N");
+            return N;
         }
 
         @Override
