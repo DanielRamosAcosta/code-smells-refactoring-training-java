@@ -7,6 +7,8 @@ public class Rover {
     private int y;
     private int x;
 
+    private Coordinate coordinate;
+
     public Rover(int x, int y, String direction) {
         this.setDirection(direction);
         this.setCoordinates(x, y);
@@ -66,6 +68,7 @@ public class Rover {
     private void setCoordinates(int x1, int y1) {
         y = y1;
         x = x1;
+        coordinate = new Coordinate(x, y);
     }
 
     @Override
