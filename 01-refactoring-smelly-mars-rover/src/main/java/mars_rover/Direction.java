@@ -1,7 +1,27 @@
 package mars_rover;
 
 public enum Direction {
-    N, S, E, W;
+    N {
+        @Override
+        public Direction rotateLeft() {
+            return Direction.create("W");
+        }
+    }, S {
+        @Override
+        public Direction rotateLeft() {
+            return Direction.create("E");
+        }
+    }, E {
+        @Override
+        public Direction rotateLeft() {
+            return Direction.create("N");
+        }
+    }, W {
+        @Override
+        public Direction rotateLeft() {
+            return Direction.create("S");
+        }
+    };
 
     public static Direction create(String encoding) {
         switch (encoding) {
@@ -27,4 +47,6 @@ public enum Direction {
     boolean isFacingWest() {
         return equals(W);
     }
+
+    public abstract Direction rotateLeft();
 }
