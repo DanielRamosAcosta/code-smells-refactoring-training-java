@@ -11,6 +11,14 @@ public class Coordinate {
         this.y = y;
     }
 
+    Coordinate moveAlongXAxis(int displacement) {
+        return new Coordinate(x + displacement, y);
+    }
+
+    Coordinate moveAlongYAxis(int displacement) {
+        return new Coordinate(x, y + displacement);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -32,11 +40,4 @@ public class Coordinate {
                 '}';
     }
 
-    Coordinate moveAlongXAxis(int displacement) {
-        return new Coordinate(x + displacement, y);
-    }
-
-    Coordinate moveAlongYAxis(int displacement) {
-        return new Coordinate(x, y + displacement);
-    }
 }
