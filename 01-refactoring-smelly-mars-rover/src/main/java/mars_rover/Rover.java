@@ -76,20 +76,19 @@ public class Rover {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Rover rover = (Rover) o;
-        return y == rover.y && x == rover.x && direction == rover.direction;
+        return direction == rover.direction && Objects.equals(coordinate, rover.coordinate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(direction, y, x);
+        return Objects.hash(direction, coordinate);
     }
 
     @Override
     public String toString() {
         return "Rover{" +
                 "direction=" + direction +
-                ", y=" + y +
-                ", x=" + x +
+                ", coordinate=" + coordinate +
                 '}';
     }
 
