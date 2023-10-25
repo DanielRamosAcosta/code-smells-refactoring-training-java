@@ -4,8 +4,6 @@ import java.util.Objects;
 public class Rover {
 
     private Direction direction;
-    private int y;
-    private int x;
 
     private Coordinate coordinate;
 
@@ -53,22 +51,20 @@ public class Rover {
                 int displacement = displacement1;
 
                 if (direction.isFacingNorth()) {
-                    setCoordinates(x, y + displacement);
+                    setCoordinates(coordinate.getX(), coordinate.getY() + displacement);
                 } else if (direction.isFacingSouth()) {
-                    setCoordinates(x, y - displacement);
+                    setCoordinates(coordinate.getX(), coordinate.getY() - displacement);
                 } else if (direction.isFacingWest()) {
-                    setCoordinates(x - displacement, y);
+                    setCoordinates(coordinate.getX() - displacement, coordinate.getY());
                 } else {
-                    setCoordinates(x + displacement, y);
+                    setCoordinates(coordinate.getX() + displacement, coordinate.getY());
                 }
             }
         }
     }
 
     private void setCoordinates(int x1, int y1) {
-        y = y1;
-        x = x1;
-        coordinate = new Coordinate(x, y);
+        coordinate = new Coordinate(x1, y1);
     }
 
     @Override
