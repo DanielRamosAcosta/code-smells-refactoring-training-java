@@ -10,7 +10,7 @@ public class Rover {
     private Coordinate coordinate;
 
     public Rover(int x, int y, String direction) {
-        this.direction = Direction.create(direction);
+        this.direction = Direction.fromEncoding(direction);
         coordinate = new Coordinate(x, y);
     }
 

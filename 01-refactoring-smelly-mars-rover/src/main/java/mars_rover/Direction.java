@@ -67,7 +67,7 @@ public enum Direction {
     private static final String EAST_ENCODING = "E";
     private static final String WEST_ENCODING = "W";
 
-    public static Direction create(String encoding) {
+    public static Direction fromEncoding(String encoding) {
         switch (encoding) {
             case SOUTH_ENCODING:
                 return S;
