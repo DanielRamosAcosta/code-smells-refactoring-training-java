@@ -19,17 +19,7 @@ public class Rover {
             if (command.equals("l")) {
                 direction = direction.rotateLeft();
             } else if (command.equals("r")) {
-
-                // Rotate Rover right
-                if (direction.isFacingNorth()) {
-                    this.direction = Direction.create("E");
-                } else if (direction.isFacingSouth()) {
-                    this.direction = Direction.create("W");
-                } else if (direction.isFacingWest()) {
-                    this.direction = Direction.create("N");
-                } else {
-                    this.direction = Direction.create("S");
-                }
+                direction = direction.rotateRight();
             } else {
 
                 // Displace Rover
