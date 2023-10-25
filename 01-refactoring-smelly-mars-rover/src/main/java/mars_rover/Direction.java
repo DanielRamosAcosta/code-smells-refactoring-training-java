@@ -85,4 +85,5 @@ public enum Direction {
     public abstract Direction rotateRight();
 
     public abstract Coordinate move(Coordinate coordinate, int displacement);
+
 }

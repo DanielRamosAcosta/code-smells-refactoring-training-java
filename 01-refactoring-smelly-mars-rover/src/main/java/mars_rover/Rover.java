@@ -1,15 +1,13 @@
 package mars_rover;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class Rover {
 
+    public static final int DISPLACEMENT = 1;
     private Direction direction;
 
     private Coordinate coordinate;
-
-    public static final int DISPLACEMENT = 1;
 
     public Rover(int x, int y, String direction) {
         this.direction = Direction.create(direction);
@@ -18,17 +16,14 @@ public class Rover {
 
     public void receive(String commandsSequence) {
         final List<String> commands = extractCommands(commandsSequence);
-
         commands.forEach(this::execute);
     }
 
     private static List<String> extractCommands(String commandsSequence) {
-        List<String> commands = new ArrayList<>();
-        for (int i = 0; i < commandsSequence.length(); ++i) {
-            String command = commandsSequence.substring(i, i + 1);
-            commands.add(command);
+        if (commandsSequence.isEmpty()) {
+            return List.of();
         }
-        return commands;
+        return List.of(commandsSequence.split(""));
     }
 
     private void execute(String command) {
@@ -37,10 +32,8 @@ public class Rover {
         } else if (command.equals("r")) {
             direction = direction.rotateRight();
         } else if (command.equals("f")) {
-            // Displace Rover
             coordinate = direction.move(coordinate, DISPLACEMENT);
         } else {
-            // Displace Rover
             coordinate = direction.move(coordinate, -DISPLACEMENT);
         }
     }
