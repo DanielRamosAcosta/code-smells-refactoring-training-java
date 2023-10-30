@@ -24,14 +24,18 @@ public class BirthdayService {
 
         for (Employee employee : employees) {
             if (employee.isBirthday(ourDate)) {
-                String recipient = employee.getEmail();
-                String body = "Happy Birthday, dear %NAME%!".replace("%NAME%",
-                    employee.getFirstName());
-                String subject = "Happy Birthday!";
-                sendMessage(smtpHost, smtpPort, "sender@here.com", subject,
-                    body, recipient);
+                sendMessage(smtpHost, smtpPort, employee);
             }
         }
+    }
+
+    private void sendMessage(final String smtpHost, final int smtpPort, final Employee employee) throws MessagingException {
+        String recipient = employee.getEmail();
+        String body = "Happy Birthday, dear %NAME%!".replace("%NAME%",
+            employee.getFirstName());
+        String subject = "Happy Birthday!";
+        sendMessage(smtpHost, smtpPort, "sender@here.com", subject,
+            body, recipient);
     }
 
     private List<Employee> getEmployees(final String fileName) throws IOException, ParseException {
