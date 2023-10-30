@@ -18,8 +18,8 @@ public class FileEmployeeRepository {
 
   List<Employee> getEmployees() throws IOException, ParseException {
       BufferedReader in = new BufferedReader(new FileReader(this.fileName));
-      String str = "";
-      str = in.readLine(); // skip header
+      String str;
+      skipHeader(in);
       List<Employee> employees = new ArrayList<>();
       while ((str = in.readLine()) != null) {
           String[] employeeData = str.split(", ");
@@ -28,5 +28,9 @@ public class FileEmployeeRepository {
           employees.add(employee);
       }
       return employees;
+  }
+
+  private void skipHeader(final BufferedReader in) throws IOException {
+     in.readLine();
   }
 }
