@@ -1,6 +1,7 @@
 package birthdaygreetings;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
@@ -17,8 +18,13 @@ public class FileEmployeeRepository {
   }
 
   List<Employee> getEmployees() throws IOException, ParseException {
-      BufferedReader in = new BufferedReader(new FileReader(this.fileName));
-      String str;
+    BufferedReader in = null;
+    try {
+      in = new BufferedReader(new FileReader(this.fileName));
+    } catch (FileNotFoundException e) {
+      throw new RetrieveEmployeeException(e);
+    }
+    String str;
       skipHeader(in);
       List<Employee> employees = new ArrayList<>();
       while ((str = in.readLine()) != null) {
