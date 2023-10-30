@@ -38,6 +38,9 @@ public class BirthdayService {
                         body, recipient);
             }
         }
+
+        for (Employee employee : employees) {
+        }
     }
 
     private void sendMessage(String smtpHost, int smtpPort, String sender,
