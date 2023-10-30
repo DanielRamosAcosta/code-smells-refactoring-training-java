@@ -1,10 +1,7 @@
 package birthdaygreetings;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.mail.Message;
@@ -17,10 +14,13 @@ import javax.mail.internet.MimeMessage;
 
 public class BirthdayService {
 
+    private FileEmployeeRepository fileEmployeeRepository;
+
     public void sendGreetings(String fileName, OurDate ourDate,
             String smtpHost, int smtpPort) throws IOException, ParseException,
             AddressException, MessagingException {
-        final List<Employee> employees = getEmployees(fileName);
+        this.fileEmployeeRepository = new FileEmployeeRepository();
+        final List<Employee> employees = fileEmployeeRepository.getEmployees(fileName);
 
         for (Employee employee : employees) {
             if (employee.isBirthday(ourDate)) {
@@ -36,20 +36,6 @@ public class BirthdayService {
         String subject = "Happy Birthday!";
         sendMessage(smtpHost, smtpPort, "sender@here.com", subject,
             body, recipient);
-    }
-
-    private List<Employee> getEmployees(final String fileName) throws IOException, ParseException {
-        BufferedReader in = new BufferedReader(new FileReader(fileName));
-        String str = "";
-        str = in.readLine(); // skip header
-        List<Employee> employees = new ArrayList<>();
-        while ((str = in.readLine()) != null) {
-            String[] employeeData = str.split(", ");
-            Employee employee = new Employee(employeeData[1], employeeData[0],
-                    employeeData[2], employeeData[3]);
-            employees.add(employee);
-        }
-        return employees;
     }
 
     private void sendMessage(String smtpHost, int smtpPort, String sender,
