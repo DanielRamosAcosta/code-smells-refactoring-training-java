@@ -19,7 +19,7 @@ public class BirthdayService {
     public void sendGreetings(String fileName, OurDate ourDate,
             String smtpHost, int smtpPort) throws IOException, ParseException,
             AddressException, MessagingException {
-        this.fileEmployeeRepository = new FileEmployeeRepository();
+        this.fileEmployeeRepository = new FileEmployeeRepository(fileName);
         final List<Employee> employees = fileEmployeeRepository.getEmployees(fileName);
 
         for (Employee employee : employees) {

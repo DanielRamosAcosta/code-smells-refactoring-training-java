@@ -9,6 +9,13 @@ import java.util.List;
 
 public class FileEmployeeRepository {
 
+  private final String fileName;
+
+  public FileEmployeeRepository(final String fileName) {
+
+    this.fileName = fileName;
+  }
+
   List<Employee> getEmployees(final String fileName) throws IOException, ParseException {
       BufferedReader in = new BufferedReader(new FileReader(fileName));
       String str = "";
