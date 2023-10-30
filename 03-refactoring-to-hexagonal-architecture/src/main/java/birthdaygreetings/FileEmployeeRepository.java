@@ -19,13 +19,13 @@ public class FileEmployeeRepository {
 
   List<Employee> getEmployees() throws IOException, ParseException {
     BufferedReader in = null;
+    String str;
     try {
       in = new BufferedReader(new FileReader(this.fileName));
-    } catch (FileNotFoundException e) {
+      skipHeader(in);
+    } catch (IOException e) {
       throw new RetrieveEmployeeException(e);
     }
-    String str;
-      skipHeader(in);
       List<Employee> employees = new ArrayList<>();
       while ((str = in.readLine()) != null) {
           String[] employeeData = str.split(", ");
@@ -36,7 +36,7 @@ public class FileEmployeeRepository {
       return employees;
   }
 
-  private void skipHeader(final BufferedReader in) throws IOException {
+  protected void skipHeader(final BufferedReader in) throws IOException {
      in.readLine();
   }
 }
