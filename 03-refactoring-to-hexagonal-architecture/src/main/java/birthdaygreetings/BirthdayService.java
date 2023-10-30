@@ -20,7 +20,7 @@ public class BirthdayService {
             String smtpHost, int smtpPort) throws IOException, ParseException,
             AddressException, MessagingException {
         this.fileEmployeeRepository = new FileEmployeeRepository(fileName);
-        final List<Employee> employees = fileEmployeeRepository.getEmployees(fileName);
+        final List<Employee> employees = fileEmployeeRepository.getEmployees();
 
         for (Employee employee : employees) {
             if (employee.isBirthday(ourDate)) {
