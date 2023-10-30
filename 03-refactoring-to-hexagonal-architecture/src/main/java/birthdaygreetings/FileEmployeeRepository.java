@@ -17,7 +17,7 @@ public class FileEmployeeRepository {
   }
 
   List<Employee> getEmployees(final String fileName) throws IOException, ParseException {
-      BufferedReader in = new BufferedReader(new FileReader(fileName));
+      BufferedReader in = new BufferedReader(new FileReader(this.fileName));
       String str = "";
       str = in.readLine(); // skip header
       List<Employee> employees = new ArrayList<>();
