@@ -14,9 +14,9 @@ import java.util.List;
 
 public class EmailGreetingsSender implements GreetingsSender {
 
-    private String smtpHost;
-    private int smtpPort;
-    private String sender;
+    private final String smtpHost;
+    private final int smtpPort;
+    private final String sender;
 
     public EmailGreetingsSender(String smtpHost, int smtpPort, String sender) {
         this.smtpHost = smtpHost;
