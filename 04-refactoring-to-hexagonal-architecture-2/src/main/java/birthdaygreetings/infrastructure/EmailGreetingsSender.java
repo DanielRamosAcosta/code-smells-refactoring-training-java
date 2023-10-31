@@ -2,6 +2,7 @@ package birthdaygreetings.infrastructure;
 
 import birthdaygreetings.core.CannotSendGreetingsMessageException;
 import birthdaygreetings.core.GreetingMessage;
+import birthdaygreetings.core.GreetingsSender;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -11,7 +12,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.List;
 
-public class EmailGreetingsSender {
+public class EmailGreetingsSender implements GreetingsSender {
 
     private String smtpHost;
     private int smtpPort;
@@ -23,6 +24,7 @@ public class EmailGreetingsSender {
         this.sender = sender;
     }
 
+    @Override
     public void send(List<GreetingMessage> messages) {
         for (GreetingMessage message : messages) {
             String recipient = message.to();
