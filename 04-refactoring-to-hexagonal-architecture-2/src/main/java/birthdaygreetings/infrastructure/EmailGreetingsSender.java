@@ -34,24 +34,30 @@ public class EmailGreetingsSender implements GreetingsSender {
 
     private void sendMessage(GreetingMessage message) {
         try {
-            // Create a mail session
-            java.util.Properties props = new java.util.Properties();
-            props.put("mail.smtp.host", this.smtpHost);
-            props.put("mail.smtp.port", "" + this.smtpPort);
-            Session session = Session.getDefaultInstance(props, null);
+            Session session = createMailSession();
 
-            // Construct the message
-            Message msg = new MimeMessage(session);
-            msg.setFrom(new InternetAddress(this.sender));
-            msg.setRecipient(Message.RecipientType.TO, new InternetAddress(message.to()));
-            msg.setSubject(message.subject());
-            msg.setText(message.text());
+            Message msg = constructMessage(message, session);
 
-            // Send the message
             sendMessage(msg);
         } catch (MessagingException e) {
             throw new CannotSendGreetingsMessageException(e);
         }
+    }
+
+    private Message constructMessage(GreetingMessage message, Session session) throws MessagingException {
+        Message msg = new MimeMessage(session);
+        msg.setFrom(new InternetAddress(this.sender));
+        msg.setRecipient(Message.RecipientType.TO, new InternetAddress(message.to()));
+        msg.setSubject(message.subject());
+        msg.setText(message.text());
+        return msg;
+    }
+
+    private Session createMailSession() {
+        java.util.Properties props = new java.util.Properties();
+        props.put("mail.smtp.host", this.smtpHost);
+        props.put("mail.smtp.port", "" + this.smtpPort);
+        return Session.getDefaultInstance(props, null);
     }
 
     protected void sendMessage(Message msg) throws MessagingException {
