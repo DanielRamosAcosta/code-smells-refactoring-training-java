@@ -26,9 +26,7 @@ public class EmailGreetingsSender implements GreetingsSender {
 
     @Override
     public void send(List<GreetingMessage> messages) {
-        for (GreetingMessage message : messages) {
-            sendMessage(message);
-        }
+        messages.forEach(this::sendMessage);
     }
 
 
