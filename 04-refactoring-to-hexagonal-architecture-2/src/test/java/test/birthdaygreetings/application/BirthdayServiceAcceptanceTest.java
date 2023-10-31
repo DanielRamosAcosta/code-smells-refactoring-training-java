@@ -1,6 +1,7 @@
 package test.birthdaygreetings.application;
 
 import birthdaygreetings.application.BirthdayService;
+import birthdaygreetings.core.GreetingsSender;
 import birthdaygreetings.core.OurDate;
 import birthdaygreetings.infrastructure.EmailGreetingsSender;
 import birthdaygreetings.infrastructure.repositories.FileEmployeesRepository;
@@ -14,7 +15,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static test.birthdaygreetings.helpers.OurDateFactory.ourDateFromString;
 
-public class BirthdayServiceAcceptanceTest {
+class BirthdayServiceAcceptanceTest {
 
     private static final int SMTP_PORT = 25;
     private String SMTP_HOST = "localhost";
@@ -27,7 +28,7 @@ public class BirthdayServiceAcceptanceTest {
     public void setUp() {
         messagesSent = new ArrayList<>();
 
-        EmailGreetingsSender greetingsSender = new EmailGreetingsSender(SMTP_HOST, SMTP_PORT, FROM){
+        GreetingsSender greetingsSender = new EmailGreetingsSender(SMTP_HOST, SMTP_PORT, FROM){
             @Override
             public void sendMessage(Message msg) {
                 messagesSent.add(msg);
@@ -37,7 +38,7 @@ public class BirthdayServiceAcceptanceTest {
     }
 
     @Test
-    public void baseScenario() throws Exception {
+    void baseScenario() throws Exception {
         OurDate today = ourDateFromString("2008/10/08");
 
         service.sendGreetings(today);
@@ -51,7 +52,7 @@ public class BirthdayServiceAcceptanceTest {
     }
 
     @Test
-    public void willNotSendEmailsWhenNobodysBirthday() throws Exception {
+    void willNotSendEmailsWhenNobodysBirthday() throws Exception {
         OurDate today = ourDateFromString("2008/01/01");
 
         service.sendGreetings(today);
