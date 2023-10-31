@@ -27,15 +27,12 @@ public class EmailGreetingsSender implements GreetingsSender {
     @Override
     public void send(List<GreetingMessage> messages) {
         for (GreetingMessage message : messages) {
-            String recipient = message.to();
-            String body = message.text();
-            String subject = message.subject();
-            sendMessage(subject, body, recipient);
+            sendMessage(message);
         }
     }
 
 
-    private void sendMessage(String subject, String body, String recipient) {
+    private void sendMessage(GreetingMessage message) {
         try {
             // Create a mail session
             java.util.Properties props = new java.util.Properties();
@@ -46,9 +43,9 @@ public class EmailGreetingsSender implements GreetingsSender {
             // Construct the message
             Message msg = new MimeMessage(session);
             msg.setFrom(new InternetAddress(this.sender));
-            msg.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
-            msg.setSubject(subject);
-            msg.setText(body);
+            msg.setRecipient(Message.RecipientType.TO, new InternetAddress(message.to()));
+            msg.setSubject(message.subject());
+            msg.setText(message.text());
 
             // Send the message
             sendMessage(msg);
