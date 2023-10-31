@@ -28,7 +28,7 @@ public class BirthdayServiceAcceptanceTest {
     public void setUp() {
         messagesSent = new ArrayList<>();
 
-        EmailGreetingsSender greetingsSender = new EmailGreetingsSender(){
+        EmailGreetingsSender greetingsSender = new EmailGreetingsSender(SMTP_HOST, SMTP_PORT, FROM){
             @Override
             public void sendMessage(Message msg) {
                 messagesSent.add(msg);

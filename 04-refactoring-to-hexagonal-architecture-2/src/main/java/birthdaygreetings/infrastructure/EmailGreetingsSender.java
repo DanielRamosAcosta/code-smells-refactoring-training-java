@@ -1,18 +1,44 @@
 package birthdaygreetings.infrastructure;
 
+import birthdaygreetings.core.GreetingMessage;
+
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.util.List;
 
 public class EmailGreetingsSender {
+
+    private String smtpHost;
+    private int smtpPort;
+    private String sender;
+
+    public EmailGreetingsSender() {
+    }
+
+    public EmailGreetingsSender(String smtpHost, int smtpPort, String sender) {
+        this.smtpHost = smtpHost;
+        this.smtpPort = smtpPort;
+        this.sender = sender;
+    }
+
+    public void send(List<GreetingMessage> messages, String smtpHost, int smtpPort, String sender) throws MessagingException {
+        for (GreetingMessage message : messages) {
+            String recipient = message.to();
+            String body = message.text();
+            String subject = message.subject();
+            sendMessage(smtpHost, smtpPort, sender, subject, body, recipient);
+        }
+    }
+
     protected void sendMessage(Message msg) throws MessagingException {
         Transport.send(msg);
     }
 
-    public void sendMessage(String smtpHost, int smtpPort, String sender,
+    private void sendMessage(String smtpHost, int smtpPort, String sender,
                             String subject, String body, String recipient)
         throws MessagingException {
         // Create a mail session
@@ -32,4 +58,5 @@ public class EmailGreetingsSender {
         // Send the message
         sendMessage(msg);
     }
+
 }
