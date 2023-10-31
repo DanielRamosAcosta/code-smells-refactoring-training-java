@@ -8,7 +8,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class EmailGreetingsSender {
-    public void sendMessage(Message msg) throws MessagingException {
+    protected void sendMessage(Message msg) throws MessagingException {
         Transport.send(msg);
     }
 
