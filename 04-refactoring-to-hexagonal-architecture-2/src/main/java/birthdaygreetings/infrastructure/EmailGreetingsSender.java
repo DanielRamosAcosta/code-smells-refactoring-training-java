@@ -16,21 +16,18 @@ public class EmailGreetingsSender {
     private int smtpPort;
     private String sender;
 
-    public EmailGreetingsSender() {
-    }
-
     public EmailGreetingsSender(String smtpHost, int smtpPort, String sender) {
         this.smtpHost = smtpHost;
         this.smtpPort = smtpPort;
         this.sender = sender;
     }
 
-    public void send(List<GreetingMessage> messages, String smtpHost, int smtpPort, String sender) throws MessagingException {
+    public void send(List<GreetingMessage> messages) throws MessagingException {
         for (GreetingMessage message : messages) {
             String recipient = message.to();
             String body = message.text();
             String subject = message.subject();
-            sendMessage(smtpHost, smtpPort, sender, subject, body, recipient);
+            sendMessage(subject, body, recipient);
         }
     }
 
@@ -38,18 +35,17 @@ public class EmailGreetingsSender {
         Transport.send(msg);
     }
 
-    private void sendMessage(String smtpHost, int smtpPort, String sender,
-                            String subject, String body, String recipient)
+    private void sendMessage(String subject, String body, String recipient)
         throws MessagingException {
         // Create a mail session
         java.util.Properties props = new java.util.Properties();
-        props.put("mail.smtp.host", smtpHost);
-        props.put("mail.smtp.port", "" + smtpPort);
+        props.put("mail.smtp.host", this.smtpHost);
+        props.put("mail.smtp.port", "" + this.smtpPort);
         Session session = Session.getDefaultInstance(props, null);
 
         // Construct the message
         Message msg = new MimeMessage(session);
-        msg.setFrom(new InternetAddress(sender));
+        msg.setFrom(new InternetAddress(this.sender));
         msg.setRecipient(Message.RecipientType.TO, new InternetAddress(
             recipient));
         msg.setSubject(subject);

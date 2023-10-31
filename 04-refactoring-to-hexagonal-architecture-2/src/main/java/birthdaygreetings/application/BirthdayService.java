@@ -19,8 +19,8 @@ public class BirthdayService {
         this.greetingsSender = greetingsSender;
     }
 
-    public void sendGreetings(OurDate date, String smtpHost, int smtpPort, String sender) throws MessagingException {
-        greetingsSender.send(greetingMessagesFor(employeesHavingBirthday(date)),smtpHost, smtpPort, sender);
+    public void sendGreetings(OurDate date) throws MessagingException {
+        greetingsSender.send(greetingMessagesFor(employeesHavingBirthday(date)));
     }
 
     private List<GreetingMessage> greetingMessagesFor(List<Employee> employees) {

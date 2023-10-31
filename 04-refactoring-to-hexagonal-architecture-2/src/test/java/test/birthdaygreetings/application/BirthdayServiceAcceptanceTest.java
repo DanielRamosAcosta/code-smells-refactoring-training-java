@@ -8,7 +8,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import javax.mail.Message;
-import javax.mail.MessagingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +40,7 @@ public class BirthdayServiceAcceptanceTest {
     public void baseScenario() throws Exception {
         OurDate today = ourDateFromString("2008/10/08");
 
-        service.sendGreetings(today, SMTP_HOST, SMTP_PORT, FROM);
+        service.sendGreetings(today);
 
         assertEquals(1, messagesSent.size(), "message not sent?");
         Message message = messagesSent.get(0);
@@ -55,7 +54,7 @@ public class BirthdayServiceAcceptanceTest {
     public void willNotSendEmailsWhenNobodysBirthday() throws Exception {
         OurDate today = ourDateFromString("2008/01/01");
 
-        service.sendGreetings(today, SMTP_HOST, SMTP_PORT, FROM);
+        service.sendGreetings(today);
 
         assertEquals(0, messagesSent.size());
     }
