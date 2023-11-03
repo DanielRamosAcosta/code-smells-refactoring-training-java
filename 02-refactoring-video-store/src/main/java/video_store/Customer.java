@@ -23,13 +23,10 @@ public class Customer {
         String result = "Rental Record for " + getName() + "\n";
 
         while (rentals.hasMoreElements()) {
-            double thisAmount = 0;
             Rental rental = (Rental) rentals.nextElement();
-            thisAmount = rental.calculateAmount();
+            double thisAmount = rental.calculateAmount();
             frequentRenterPoints = frequentRenterPoints + rental.computeFrequentRenterPoints();
-
-            result += "\t" + rental.getMovie().getTitle() + "\t"
-                + thisAmount + "\n";
+            result += "\t" + rental.getMovie().getTitle() + "\t" + thisAmount + "\n";
             totalAmount += thisAmount;
 
         }
