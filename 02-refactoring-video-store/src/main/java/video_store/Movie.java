@@ -21,4 +21,33 @@ public class Movie {
         return title;
     }
 
+    int frequentRenterPointsFor(int daysRented1) {
+        int frequentRenterPointsToAdd = 1;
+        if (getPriceCode() == NEW_RELEASE) {
+            if (daysRented1 > 1) {
+                frequentRenterPointsToAdd++;
+            }
+        }
+        return frequentRenterPointsToAdd;
+    }
+
+    double amountFor(int daysRented1) {
+        double thisAmount = 0;
+        switch (getPriceCode()) {
+            case REGULAR:
+                thisAmount += 2;
+                if (daysRented1 > 2)
+                    thisAmount += (daysRented1 - 2) * 1.5;
+                break;
+            case NEW_RELEASE:
+                thisAmount += daysRented1 * 3;
+                break;
+            case CHILDRENS:
+                thisAmount += 1.5;
+                if (daysRented1 > 3)
+                    thisAmount += (daysRented1 - 3) * 1.5;
+                break;
+        }
+        return thisAmount;
+    }
 }
