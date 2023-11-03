@@ -8,8 +8,6 @@ import java.util.Enumeration;
 public class Customer {
     private final String name;
 
-    private final Vector rentals2 = new Vector();
-
     private final List<Rental> rentals = new ArrayList<>();
 
 
@@ -18,7 +16,6 @@ public class Customer {
     }
 
     public void addRental(Rental rental) {
-        rentals2.addElement(rental);
         rentals.add(rental);
     }
 
