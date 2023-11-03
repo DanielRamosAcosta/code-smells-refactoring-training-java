@@ -2,8 +2,6 @@ package video_store;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
-import java.util.Enumeration;
 
 public class Customer {
     private final String name;
@@ -24,27 +22,44 @@ public class Customer {
     }
 
     public String statement() {
-        String result = "Rental Record for " + getName() + "\n";
 
-        final double totalAmount = getTotalAmount();
-        final int frequentRenterPoints = getFrequentRenterPoints();
+        final double totalAmount = computeTotalAmount();
+        final int frequentRenterPoints = computeFrequentRenterPoints();
 
+        return renderStatement(totalAmount, frequentRenterPoints);
+    }
+
+    private String renderStatement(double totalAmount, int frequentRenterPoints) {
+        String result = renderHeader();
         for (Rental rental : this.rentals) {
-            double thisAmount = rental.calculateAmount();
-            result += "\t" + rental.getMovie().getTitle() + "\t" + thisAmount + "\n";
+            result += renderLineFor(rental);
         }
-
-        result += "You owed " + totalAmount + "\n";
-        result += "You earned " + frequentRenterPoints + " frequent renter points\n";
-
+        result += renderTotalAmount(totalAmount);
+        result += renderFrequentRenterPoints(frequentRenterPoints);
         return result;
     }
 
-    private int getFrequentRenterPoints() {
+    private static String renderFrequentRenterPoints(int frequentRenterPoints) {
+        return "You earned " + frequentRenterPoints + " frequent renter points\n";
+    }
+
+    private static String renderTotalAmount(double totalAmount) {
+        return "You owed " + totalAmount + "\n";
+    }
+
+    private static String renderLineFor(Rental rental) {
+        return "\t" + rental.getTitle() + "\t" + rental.calculateAmount() + "\n";
+    }
+
+    private String renderHeader() {
+        return "Rental Record for " + name + "\n";
+    }
+
+    private int computeFrequentRenterPoints() {
         return this.rentals.stream().mapToInt(Rental::computeFrequentRenterPoints).sum();
     }
 
-    private double getTotalAmount() {
+    private double computeTotalAmount() {
         return this.rentals.stream().mapToDouble(Rental::calculateAmount).sum();
     }
 }
