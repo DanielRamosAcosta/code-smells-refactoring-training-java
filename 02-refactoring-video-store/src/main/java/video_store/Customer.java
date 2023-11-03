@@ -30,13 +30,16 @@ public class Customer {
     }
 
     private String renderStatement(double totalAmount, int frequentRenterPoints) {
-        String result = renderHeader();
+        List<String> lines = new ArrayList<>();
+
+        lines.add(renderHeader());
         for (Rental rental : this.rentals) {
-            result += renderLineFor(rental);
+            lines.add(renderLineFor(rental));
         }
-        result += renderTotalAmount(totalAmount);
-        result += renderFrequentRenterPoints(frequentRenterPoints);
-        return result;
+        lines.add(renderTotalAmount(totalAmount));
+        lines.add(renderFrequentRenterPoints(frequentRenterPoints));
+
+        return String.join("", lines);
     }
 
     private static String renderFrequentRenterPoints(int frequentRenterPoints) {
