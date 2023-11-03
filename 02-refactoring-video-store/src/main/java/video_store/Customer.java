@@ -30,9 +30,16 @@ public class Customer {
 
         for (Rental rental : this.rentals) {
             double thisAmount = rental.calculateAmount();
-            frequentRenterPoints = frequentRenterPoints + rental.computeFrequentRenterPoints();
-            result += "\t" + rental.getMovie().getTitle() + "\t" + thisAmount + "\n";
             totalAmount += thisAmount;
+        }
+
+        for (Rental rental : this.rentals) {
+            frequentRenterPoints = frequentRenterPoints + rental.computeFrequentRenterPoints();
+        }
+
+        for (Rental rental : this.rentals) {
+            double thisAmount = rental.calculateAmount();
+            result += "\t" + rental.getMovie().getTitle() + "\t" + thisAmount + "\n";
         }
 
         result += "You owed " + totalAmount + "\n";
