@@ -24,18 +24,10 @@ public class Customer {
     }
 
     public String statement() {
-        double totalAmount = 0;
-        int frequentRenterPoints = 0;
         String result = "Rental Record for " + getName() + "\n";
 
-        for (Rental rental : this.rentals) {
-            double thisAmount = rental.calculateAmount();
-            totalAmount += thisAmount;
-        }
-
-        for (Rental rental : this.rentals) {
-            frequentRenterPoints = frequentRenterPoints + rental.computeFrequentRenterPoints();
-        }
+        final double totalAmount = getTotalAmount();
+        final int frequentRenterPoints = getFrequentRenterPoints();
 
         for (Rental rental : this.rentals) {
             double thisAmount = rental.calculateAmount();
@@ -46,5 +38,13 @@ public class Customer {
         result += "You earned " + frequentRenterPoints + " frequent renter points\n";
 
         return result;
+    }
+
+    private int getFrequentRenterPoints() {
+        return this.rentals.stream().mapToInt(Rental::computeFrequentRenterPoints).sum();
+    }
+
+    private double getTotalAmount() {
+        return this.rentals.stream().mapToDouble(Rental::calculateAmount).sum();
     }
 }
