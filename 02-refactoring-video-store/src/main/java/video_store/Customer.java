@@ -22,10 +22,8 @@ public class Customer {
     }
 
     public String statement() {
-
         final double totalAmount = computeTotalAmount();
         final int frequentRenterPoints = computeFrequentRenterPoints();
-
         return renderStatement(totalAmount, frequentRenterPoints);
     }
 
@@ -39,7 +37,7 @@ public class Customer {
         lines.add(renderTotalAmount(totalAmount));
         lines.add(renderFrequentRenterPoints(frequentRenterPoints));
 
-        return String.join("", lines);
+        return String.join("\n", lines);
     }
 
     private static String renderFrequentRenterPoints(int frequentRenterPoints) {
@@ -47,15 +45,15 @@ public class Customer {
     }
 
     private static String renderTotalAmount(double totalAmount) {
-        return "You owed " + totalAmount + "\n";
+        return "You owed " + totalAmount;
     }
 
     private static String renderLineFor(Rental rental) {
-        return "\t" + rental.getTitle() + "\t" + rental.calculateAmount() + "\n";
+        return "\t" + rental.getTitle() + "\t" + rental.calculateAmount();
     }
 
     private String renderHeader() {
-        return "Rental Record for " + name + "\n";
+        return "Rental Record for " + name;
     }
 
     private int computeFrequentRenterPoints() {
