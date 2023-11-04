@@ -6,7 +6,7 @@ public class Movie {
     public static final int NEW_RELEASE = 1;
 
     private final String title;
-    private final int priceCode;
+    protected final int priceCode;
 
     public static Movie create(String title, int priceCode) {
         if (priceCode == CHILDRENS) return new ChildrensMovie(title, Movie.CHILDRENS);
@@ -25,13 +25,7 @@ public class Movie {
     }
 
     int frequentRenterPointsFor(int daysRented) {
-        int frequentRenterPointsToAdd = 1;
-        if (priceCode == NEW_RELEASE) {
-            if (daysRented > 1) {
-                frequentRenterPointsToAdd++;
-            }
-        }
-        return frequentRenterPointsToAdd;
+        return 1;
     }
 
     double amountFor(int daysRented) {
@@ -47,29 +41,14 @@ public class Movie {
     }
 
     double amountForExtraDay() {
-        return switch (priceCode) {
-            case REGULAR -> 1.5;
-            case NEW_RELEASE -> 3;
-            case CHILDRENS -> 1.5;
-            default -> 0;
-        };
+        return 1.5;
     }
 
     int limitDaysForRental() {
-        return switch (priceCode) {
-            case REGULAR -> 2;
-            case NEW_RELEASE -> 0;
-            case CHILDRENS -> 3;
-            default -> 0;
-        };
+        return 2;
     }
 
     double baseAmount() {
-        return switch (priceCode) {
-            case REGULAR -> 2;
-            case NEW_RELEASE -> 0;
-            case CHILDRENS -> 1.5;
-            default -> 0;
-        };
+        return 2;
     }
 }
