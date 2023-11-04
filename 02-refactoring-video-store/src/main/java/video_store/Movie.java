@@ -40,37 +40,29 @@ public class Movie {
     }
 
     double amountForExtraDay() {
-        if (priceCode == REGULAR) {
-            return 1.5;
-        } else if (priceCode == NEW_RELEASE) {
-            return 3;
-        } else if (priceCode == CHILDRENS) {
-            return 1.5;
-        }
-        return 0;
+        return switch (priceCode) {
+            case REGULAR -> 1.5;
+            case NEW_RELEASE -> 3;
+            case CHILDRENS -> 1.5;
+            default -> 0;
+        };
     }
 
     int limitDaysForRental() {
-        if (priceCode == REGULAR) {
-            return 2;
-        } else if (priceCode == NEW_RELEASE) {
-            return 0;
-        } else if (priceCode == CHILDRENS) {
-            return 3;
-        }
-        return 0;
+        return switch (priceCode) {
+            case REGULAR -> 2;
+            case NEW_RELEASE -> 0;
+            case CHILDRENS -> 3;
+            default -> 0;
+        };
     }
 
     double baseAmount() {
-        if (priceCode == REGULAR) {
-            return 2;
-        } else if (priceCode == NEW_RELEASE) {
-            double thisAmount = 0;
-            return thisAmount;
-        } else if (priceCode == CHILDRENS) {
-            double thisAmount = 1.5;
-            return thisAmount;
-        }
-        return 0;
+        return switch (priceCode) {
+            case REGULAR -> 2;
+            case NEW_RELEASE -> 0;
+            case CHILDRENS -> 1.5;
+            default -> 0;
+        };
     }
 }
