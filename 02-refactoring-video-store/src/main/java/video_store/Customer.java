@@ -24,14 +24,14 @@ public class Customer {
     public String statement() {
         final double totalAmount = computeTotalAmount();
         final int frequentRenterPoints = computeFrequentRenterPoints();
-        return renderStatement(totalAmount, frequentRenterPoints);
+        return renderStatement(totalAmount, frequentRenterPoints, this.rentals, name);
     }
 
-    private String renderStatement(double totalAmount, int frequentRenterPoints) {
+    private static String renderStatement(double totalAmount, int frequentRenterPoints, List<Rental> rentals, String name) {
         List<String> lines = new ArrayList<>();
 
-        lines.add(renderHeader());
-        for (Rental rental : this.rentals) {
+        lines.add(renderHeader(name));
+        for (Rental rental : rentals) {
             lines.add(renderLineFor(rental));
         }
         lines.add(renderTotalAmount(totalAmount));
@@ -52,7 +52,7 @@ public class Customer {
         return "\t" + rental.getTitle() + "\t" + rental.calculateAmount();
     }
 
-    private String renderHeader() {
+    private static String renderHeader(String name) {
         return "Rental Record for " + name;
     }
 

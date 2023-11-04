@@ -15,7 +15,7 @@ public class Movie {
         return new ChildrensMovie(title);
     }
 
-    Movie(String title) {
+    protected Movie(String title) {
         this.title = title;
     }
 
