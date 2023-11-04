@@ -17,32 +17,58 @@ public class Movie {
         return title;
     }
 
-    int frequentRenterPointsFor(int daysRented1) {
+    int frequentRenterPointsFor(int daysRented) {
         int frequentRenterPointsToAdd = 1;
         if (priceCode == NEW_RELEASE) {
-            if (daysRented1 > 1) {
+            if (daysRented > 1) {
                 frequentRenterPointsToAdd++;
             }
         }
         return frequentRenterPointsToAdd;
     }
 
-    double amountFor(int daysRented1) {
+    double amountFor(int daysRented) {
+        final int extraDays = daysPassedRelativeTo(daysRented);
+        if (extraDays > 0) {
+            return baseAmount() + extraDays * amountForExtraDay();
+        }
+        return baseAmount();
+    }
+
+    private int daysPassedRelativeTo(int daysRented) {
+        return daysRented - limitDaysForRental();
+    }
+
+    double amountForExtraDay() {
         if (priceCode == REGULAR) {
-            double thisAmount = 0;
-            thisAmount += 2;
-            if (daysRented1 > 2)
-                thisAmount += (daysRented1 - 2) * 1.5;
-            return thisAmount;
+            return 1.5;
+        } else if (priceCode == NEW_RELEASE) {
+            return 3;
+        } else if (priceCode == CHILDRENS) {
+            return 1.5;
+        }
+        return 0;
+    }
+
+    int limitDaysForRental() {
+        if (priceCode == REGULAR) {
+            return 2;
+        } else if (priceCode == NEW_RELEASE) {
+            return 0;
+        } else if (priceCode == CHILDRENS) {
+            return 3;
+        }
+        return 0;
+    }
+
+    double baseAmount() {
+        if (priceCode == REGULAR) {
+            return 2;
         } else if (priceCode == NEW_RELEASE) {
             double thisAmount = 0;
-            thisAmount += daysRented1 * 3;
             return thisAmount;
         } else if (priceCode == CHILDRENS) {
-            double thisAmount = 0;
-            thisAmount += 1.5;
-            if (daysRented1 > 3)
-                thisAmount += (daysRented1 - 3) * 1.5;
+            double thisAmount = 1.5;
             return thisAmount;
         }
         return 0;
