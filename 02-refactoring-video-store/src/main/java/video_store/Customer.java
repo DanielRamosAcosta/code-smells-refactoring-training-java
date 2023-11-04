@@ -17,43 +17,11 @@ public class Customer {
         rentals.add(rental);
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String statement() {
+    public String statement(StatementFormatter formatter) {
         final double totalAmount = computeTotalAmount();
         final int frequentRenterPoints = computeFrequentRenterPoints();
-        return renderStatement(totalAmount, frequentRenterPoints, this.rentals, name);
-    }
-
-    private static String renderStatement(double totalAmount, int frequentRenterPoints, List<Rental> rentals, String name) {
-        List<String> lines = new ArrayList<>();
-
-        lines.add(renderHeader(name));
-        for (Rental rental : rentals) {
-            lines.add(renderLineFor(rental));
-        }
-        lines.add(renderTotalAmount(totalAmount));
-        lines.add(renderFrequentRenterPoints(frequentRenterPoints));
-
-        return String.join("\n", lines);
-    }
-
-    private static String renderFrequentRenterPoints(int frequentRenterPoints) {
-        return "You earned " + frequentRenterPoints + " frequent renter points\n";
-    }
-
-    private static String renderTotalAmount(double totalAmount) {
-        return "You owed " + totalAmount;
-    }
-
-    private static String renderLineFor(Rental rental) {
-        return "\t" + rental.getTitle() + "\t" + rental.calculateAmount();
-    }
-
-    private static String renderHeader(String name) {
-        return "Rental Record for " + name;
+        final StatementData statementData = new StatementData(totalAmount, frequentRenterPoints, this.rentals, name);
+        return formatter.render(statementData);
     }
 
     private int computeFrequentRenterPoints() {
