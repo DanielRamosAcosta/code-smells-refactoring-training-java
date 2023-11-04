@@ -8,7 +8,14 @@ public class Movie {
     private final String title;
     private final int priceCode;
 
-    public Movie(String title, int priceCode) {
+    public static Movie create(String title, int priceCode) {
+        if (priceCode == CHILDRENS) return new ChildrensMovie(title, Movie.CHILDRENS);
+        if (priceCode == NEW_RELEASE) return new NewReleaseMovie(title, Movie.NEW_RELEASE);
+
+        return new Movie(title, REGULAR);
+    }
+
+    Movie(String title, int priceCode) {
         this.title = title;
         this.priceCode = priceCode;
     }
