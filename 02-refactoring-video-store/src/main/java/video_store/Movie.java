@@ -6,18 +6,29 @@ public class Movie {
     public static final int NEW_RELEASE = 1;
 
     private final String title;
-    protected final int priceCode;
 
     public static Movie create(String title, int priceCode) {
-        if (priceCode == CHILDRENS) return new ChildrensMovie(title, Movie.CHILDRENS);
-        if (priceCode == NEW_RELEASE) return new NewReleaseMovie(title, Movie.NEW_RELEASE);
-
-        return new Movie(title, REGULAR);
+        return switch (priceCode) {
+            case CHILDRENS -> childrens(title);
+            case NEW_RELEASE -> getNewReleaseMovie(title);
+            default -> regular(title);
+        };
     }
 
-    Movie(String title, int priceCode) {
+    public static Movie regular(String title) {
+        return new Movie(title);
+    }
+
+    public static NewReleaseMovie getNewReleaseMovie(String title) {
+        return new NewReleaseMovie(title);
+    }
+
+    public static ChildrensMovie childrens(String title) {
+        return new ChildrensMovie(title);
+    }
+
+    Movie(String title) {
         this.title = title;
-        this.priceCode = priceCode;
     }
 
     public String getTitle() {
