@@ -5,16 +5,12 @@ import java.util.List;
 
 public class ConsoleStatementFormatter implements StatementFormatter {
     @Override
-    public String render(StatementData statementData) {
+    public String render(StatementDto statementDto) {
         List<String> lines = new ArrayList<>();
-
-        lines.add(renderHeader(statementData.getName()));
-        for (Rental rental : statementData.getRentals()) {
-            lines.add(renderLineFor(rental));
-        }
-        lines.add(renderTotalAmount(statementData.getTotalAmount()));
-        lines.add(renderFrequentRenterPoints(statementData.getFrequentRenterPoints()));
-
+        lines.add(renderHeader(statementDto.getName()));
+        lines.addAll(statementDto.getRentals().map(this::renderLineFor));
+        lines.add(renderTotalAmount(statementDto.getTotalAmount()));
+        lines.add(renderFrequentRenterPoints(statementDto.getFrequentRenterPoints()));
         return String.join("\n", lines);
     }
 

@@ -5,12 +5,6 @@ public class ChildrensMovie extends Movie {
         super(title);
     }
 
-
-    @Override
-    double amountForExtraDay() {
-        return 1.5;
-    }
-
     @Override
     int limitDaysForRental() {
         return 3;

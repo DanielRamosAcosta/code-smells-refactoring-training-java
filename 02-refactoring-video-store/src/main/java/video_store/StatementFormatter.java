@@ -1,5 +1,5 @@
 package video_store;
 
 public interface StatementFormatter {
-    String render(StatementData statementData);
+    String render(StatementDto statementDto);
 }
