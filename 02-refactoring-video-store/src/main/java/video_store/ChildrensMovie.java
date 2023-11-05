@@ -6,12 +6,12 @@ public class ChildrensMovie extends Movie {
     }
 
     @Override
-    int limitDaysForRental() {
+    protected int limitDaysForRental() {
         return 3;
     }
 
     @Override
-    double baseAmount() {
+    protected double baseAmount() {
         return 1.5;
     }
 }

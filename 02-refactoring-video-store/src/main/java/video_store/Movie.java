@@ -39,15 +39,15 @@ public class Movie {
         return daysRented - limitDaysForRental();
     }
 
-    double amountForExtraDay() {
+    protected double amountForExtraDay() {
         return 1.5;
     }
 
-    int limitDaysForRental() {
+    protected int limitDaysForRental() {
         return 2;
     }
 
-    double baseAmount() {
+    protected double baseAmount() {
         return 2;
     }
 }

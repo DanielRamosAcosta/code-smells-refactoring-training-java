@@ -15,17 +15,17 @@ public class NewReleaseMovie extends Movie {
     }
 
     @Override
-    double amountForExtraDay() {
+    protected double amountForExtraDay() {
         return 3;
     }
 
     @Override
-    int limitDaysForRental() {
+    protected int limitDaysForRental() {
         return 0;
     }
 
     @Override
-    double baseAmount() {
+    protected double baseAmount() {
         return 0;
     }
 }
