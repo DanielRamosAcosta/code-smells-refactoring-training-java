@@ -6,7 +6,7 @@ public class NewReleaseMovie extends Movie {
     }
 
     @Override
-    int frequentRenterPointsFor(int daysRented) {
+    protected int frequentRenterPointsFor(int daysRented) {
         int frequentRenterPointsToAdd = 1;
         if (daysRented > 1) {
             frequentRenterPointsToAdd++;

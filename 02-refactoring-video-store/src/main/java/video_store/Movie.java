@@ -23,11 +23,7 @@ public class Movie {
         return title;
     }
 
-    int frequentRenterPointsFor(int daysRented) {
-        return 1;
-    }
-
-    double amountFor(int daysRented) {
+    public double amountFor(int daysRented) {
         final int extraDays = daysPassedRelativeTo(daysRented);
         if (extraDays > 0) {
             return baseAmount() + extraDays * amountForExtraDay();
@@ -37,6 +33,10 @@ public class Movie {
 
     private int daysPassedRelativeTo(int daysRented) {
         return daysRented - limitDaysForRental();
+    }
+
+    protected int frequentRenterPointsFor(int daysRented) {
+        return 1;
     }
 
     protected double amountForExtraDay() {
